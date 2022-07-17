@@ -38,5 +38,51 @@ usermod -L username
 usermod -U username
 ```
 #### 10. How to remove a user's password and provide him with a password-free login for subsequent password change?
-
-
+`passwd -d username`
+#### 11. Display the extended format of information about the directory, tell about the information columns displayed on the terminal.
+`ls -la`
+ - file permissions (-rwxrw-r--),
+ - number of hard links,
+ - owner name,
+ - owner group,
+ - file size in bytes,
+ - time of last modification,
+ - file/directory name
+#### 12. What access rights exist and for whom (i. e., describe the main roles)? Briefly describe the acronym for access rights.
+ - r - read (4)
+ - w - write (2)
+ - e - executable for files or accessible for directories (1)
+<br>For user, for group and for other.
+#### 13. What is the sequence of defining the relationship between the file and the user?
+If the UID of the file is the same as the UID of the process, the user is the owner of the file
+If the GID of the file matches the GID of any group the user belongs to, he is a member of the group to
+which the file belongs.
+If neither the UID no the GID of a file overlaps with the UID of the process and the list of groups that the
+user running it belongs to, that user is an outsider.
+#### 14. What commands are used to change the owner of a file (directory), as well as the mode of access to the file? Give examples, demonstrate on the terminal.
+```
+sudo chown [new_username] [filename]
+sudo chmod [permission] [filename]
+```
+![task2_14](images/task2_14.png)
+#### 15. What is an example of octal representation of access rights? Describe the umask command.
+| Symbolic | Octal |
+|----------|-------|
+| rwx      | 7     |
+| rw-      | 6     |
+| r-x      | 5     |
+| r--      | 4     |
+| -wx      | 3     |
+| -w-      | 2     |
+| --x      | 1     |
+| ---      | 0     |
+umask - get or set the file mode creation mask
+![task2_15](images/task2_15.png)
+#### 16. Give definitions of sticky bits and mechanism of identifier substitution. Give an example of files and directories with these attributes.
+```angular2html
+sudo chmod 1777 [dir_name] # add sticky bit
+sudo chmod 0777 [dir_name] # remove sticky bit
+sudo chmod 0+t
+sudo chmod o-t
+```
+#### 17. What file attributes should be present in the command script?
