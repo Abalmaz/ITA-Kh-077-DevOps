@@ -39,6 +39,26 @@ Establish SSH connection without login/password
 ![aws_make_new_commit](images/aws_make_new_commit.png)
 ![aws_success_build_after_new_commit](images/aws_success_build_after_new_commit.png)
 
+#### Jenkins nodes (slaves)
+![slave1_conf](images/slave1_conf.png)
+![slave2_conf](images/slave2_conf.png)
+![nodes](images/nodes.png)
+![job_conf_on_slave2](images/job_conf_on_slave2.png)
+![runs_job_on_slave2](images/runs_job_on_slave2.png)
+![console_output](images/console_output.png)
+
+#### Jenkins CLI
+Connect to CLI from Jenkins host
+![cli_connect_from_jenkins_pc](images/cli_connect_from_jenkins_pc.png)
+Connect to CLI from remote host
+![cli_connect_from_remote_pc](images/cli_connect_from_remote_pc.png)
+Run command from CLI to export job in xml file:
+![cli_save_job_xml_file](images/cli_save_job_xml_file.png)
+
+#### Jenkins Pipeline
+![first_jenkins_pipeline](images/first_jenkins_pipeline.png)
+
+
 
 
 
