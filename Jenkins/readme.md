@@ -57,6 +57,10 @@ Run command from CLI to export job in xml file:
 
 #### Jenkins Pipeline
 ![first_jenkins_pipeline](images/first_jenkins_pipeline.png)
+Pipeline script from SCM git
+![pipeline_from_SCM_conf](images/pipeline_from_SCM_conf.png)
+![pipeline_run_SCM](images/pipeline_run_SCM.png)
+![pipeline_run_SCM_console_log](images/pipeline_run_SCM_console_log.png)
 
 
 
