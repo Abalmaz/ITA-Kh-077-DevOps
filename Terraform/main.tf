@@ -2,42 +2,26 @@ provider "aws" {
   region = "eu-west-3"
 }
 
-variable "vpc_cidr_block" {}
-variable "subnet_cidr_block" {}
-variable "avail_zone" {}
-variable "env_pref" {}
-
-resource "aws_vpc" "myapp-vpc" {
-  cidr_block = var.vpc_cidr_block
+module "vpc" {
+  source = "terraform-aws-modules/vpc/aws"
+  name = "my-vpc"
+  cidr = var.vpc_cidr_block
+  azs             = [var.avail_zone]
+  public_subnets  = [var.subnet_cidr_block]
+  public_subnet_tags = { Name: "${var.env_pref}-subnet" }
   tags = {
     Name: "${var.env_pref}-vpc"
   }
-
 }
 
-resource "aws_subnet" "myapp-subnet" {
-  vpc_id = aws_vpc.myapp-vpc.id
-  cidr_block = var.subnet_cidr_block
-  availability_zone = var.avail_zone
-  tags = {
-    Name = "${var.env_pref}-subnet"
-  }
-}
-
-resource "aws_internet_gateway" "myapp-igw" {
-  vpc_id = aws_vpc.myapp-vpc.id
-  tags = {
-    Name = "${var.env_pref}-igw"
-  }
-}
-
-resource "aws_route_table" "myapp-rout-table" {
-  vpc_id         = aws_vpc.myapp-vpc.id
-  route {
-    cidr_block = "0.0.0.0/0"
-    gateway_id = aws_internet_gateway.myapp-igw.id
-  }
-  tags = {
-    Name = "${var.env_pref}-rtb"
-  }
+module "myapp-server" {
+  source = "./modules/webserver"
+  avail_zone          = var.avail_zone
+  env_pref            = var.env_pref
+  image_name          = var.image_name
+  instance_type       = var.instance_type
+  my_ip               = var.my_ip
+  public_key_location = var.public_key_location
+  subnet_id           = module.vpc.public_subnets[0]
+  vpc_id              = module.vpc.vpc_id
 }
